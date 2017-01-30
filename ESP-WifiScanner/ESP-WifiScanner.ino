@@ -28,15 +28,16 @@ void loop() {
     //    lastScanMillis = millis();
     //}
     if (scanReady){
-        WiFi.scanNetworks(true);
+        WiFi.scanNetworks(true); //true variable is to set the scan method as async, meaning we can do other stuff while it is scanning
         scanReady = false;
     }
-    int n = WiFi.scanComplete();    //checks if the previous run scannetworks function has completed. (runs asychronous). returns -1 if not done.
+    int n = WiFi.scanComplete();    //checks if the previous run scannetworks function has completed. (runs asychronous). returns -1 if not done. returns -2 if no scan is active
     //if scan is complete, print information for each network
     if(n >= 0){
         Serial.printf("%d network(s) found\n", n);
         for (int i = 0; i < n; i++){
             Serial.printf("%d: %s, Ch:%d (%ddBm) %s\n", i+1, WiFi.SSID(i).c_str(), WiFi.channel(i), WiFi.RSSI(i), WiFi.encryptionType(i) == ENC_TYPE_NONE ? "open" : ""); //print network information
+  
         }
         WiFi.scanDelete(); //clears the scanning result from memory to prevent repeating data
         Serial.printf("\n Scan Complete.\n");
