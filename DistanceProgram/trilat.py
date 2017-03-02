@@ -2,8 +2,10 @@ import localization as lx
 
 def trilat2D(circles):
     mySolver = "LSE"
-    if len(circles <= 2):
+    if len(circles == 2):
     	mySolver = "LSE_GC"
+    elif len(circles < 2):
+    	return -1
 
     P = lx.Project(mode="2D", solver=mySolver)
  	t, label = P.add_target()
