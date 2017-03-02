@@ -87,20 +87,7 @@ def get_polygon_center(points):
         center.y /= num
     return center
 
-def drawCircles(plt,ax,circles):
-
-    for circle in circles:
-        x = circle.center.x
-        y = circle.center.y
-        rad = circle.radius
-        ax.add_patch(plt.Circle((x,y),radius=rad, color='k', fill=False))
-        ax.add_patch(plt.Circle((x,y),radius=.01, color='k', fill=True))
-
-    plt.draw()
-
-
-
-def trilat2D(circle_list):
+def trilat2D(circles):
     ############ Define Points Here ###################
     #p1 = point(0,0)
     #p2 = point(0,1)
@@ -112,7 +99,11 @@ def trilat2D(circle_list):
     #c4 = circle(p4, 0.50)
     ###################################################
     #c1.center.x, c1.center.y, c1.radius  #class properties for above objects
-
+    circle_list = []
+    for listCircle in circles:
+        newPoint = point(listCircle.x, listCircle.y)
+        circle_list.append(circle(newPoint, listCircle.r))
+        
     #create a list containing all the properties of our nodes, (center point and radius)
     #circle_list = [c1, c2, c3, c4]
 
@@ -125,7 +116,6 @@ def trilat2D(circle_list):
 
     # THIS IS THE OUTPUT WHERE IT THINKS THE ANSWER IS
     center = get_polygon_center(inner_points)
-    print center.x, center.y #print to terminal the x and y
 
     #plot the answer on the plot
     #ax.add_patch(plt.Circle((center.x,center.y),radius=.01, color='b', fill=True))
@@ -133,11 +123,11 @@ def trilat2D(circle_list):
 
 
     #create json format for json data to write
-    in_json = json_data([c1, c2, c3, c4], [p1, p2, p3, p4], center)
-    out_json = json.dumps(in_json, sort_keys=True,
-                     indent=4, default=serialize_instance)
+    #in_json = json_data([c1, c2, c3, c4], [p1, p2, p3, p4], center)
+    #out_json = json.dumps(in_json, sort_keys=True,
+     #                indent=4, default=serialize_instance)
 
-    with open("data.json", 'w') as fw:
-        fw.write(out_json)
+    #with open("data.json", 'w') as fw:
+    #    fw.write(out_json)
 
     return center

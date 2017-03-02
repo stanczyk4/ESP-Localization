@@ -1,12 +1,13 @@
-locations = {'5E:CF:7F:D1:75:2A':[1,1], '5E:CF:7F:D1:78:FE':[2,3]}
+from definitions import *
 
 class circle(object):
-    def __init__(self,x,y,r):
+    def __init__(self,mac,x,y,r):
+        self.mac = mac
         self.x = x
         self.y = y
         self.r = r
     def __str__(self):
-        return "X:"+str(self.x)+"\nY:"+str(self.y)+"\nR:"+str(self.r)
+        return str(self.mac)+"\nX:"+str(self.x)+"\nY:"+str(self.y)+"\nR:"+str(self.r)
 
 def identify(new):
 
@@ -23,11 +24,12 @@ def identify(new):
                 x = locations.values()[j][0]
                 y = locations.values()[j][1]
                 r = new[node].values()[0]
+                mac = new[node].keys()[0]
 
                 # Associate the values into a circle object
-                newCircle = circle(x,y,r)
+                newCircle = circle(mac,x,y,r)
 
-                print newCircle
+                #print newCircle
                 
                 # Append to list
                 circles.append(newCircle)
