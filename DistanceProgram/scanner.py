@@ -255,7 +255,7 @@ def get_BSSI():
     BSSI_Values={}
 
     # A list of all the distance calculations for each node
-    distances = []
+    rssis = []
 
     NegotiatedVersion = DWORD()
     ClientHandle = HANDLE()
@@ -316,13 +316,14 @@ def get_BSSI():
                         continue
 
                     # Estimate the distance between this computer and the node. Regression function for calcultion.
-                    est_dist = distance.calculate_distance(int(signal_strength))
+                    #est_dist = distance.calculate_distance(int(signal_strength))
 
                     #Create a dictionary for this BSSID, distance pair
-                    pair = {BSSID:est_dist}
+                    pair = {BSSID:int(signal_strength)}
+                    #pair = {BSSID:est_dist}
 
                     # Add this node to the distance list
-                    distances.append(pair)
+                    rssis.append(pair)
 
 
                     BSSI_Values[BSSID] = [SSID,signal_strength]
@@ -332,4 +333,4 @@ def get_BSSI():
                 WlanCloseHandle(ClientHandle,None)
     finally:
         WlanFreeMemory(pInterfaceList)
-    return BSSI_Values, distances
+    return rssis

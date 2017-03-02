@@ -4,27 +4,27 @@ import identify
 import trilat
 import plot
 import matplotlib.pyplot as plt
+import distance
 
 def main ():
 
-    test, distances = scanner.get_BSSI()
-    distances = sorted(distances)
-    for i in range(0,10):
-        # Wait
-        time.sleep(3)
+    # Returning list of dictionaries where each is {BSSID:RSSI}
+    nodes = scanner.get_BSSI()
 
-        # Save old test and distances
-        oldTest = test
-        oldDistances = distances
+    # Calculates distances
+    # Converts {BSSID:RSSI} to {BSSID:estimated distance}
+    nodes = distance.convert(nodes)
 
-        # Scan again
-        test, distances = scanner.get_BSSI()
+    # Returns a list of circle objects (MAC,x,y,r)
+    circles = identify.identify(nodes)
+    
 
-        # Sort the list of distances
-        distances = sorted(distances)
-        circles = identify.identify(distances)
 
-        # PASS CIRCLES LIST HERE
+    for i in circles:
+        print i
+        print "\n\n"
+
+    # PASS CIRCLES LIST HERE
 
 
     fig=plt.figure(1)
@@ -33,11 +33,13 @@ def main ():
     plt.ion()
     plt.show()
     ax.cla()
+    plot.drawCircles(plt, ax, circles)
+    
+    #predictedPosition = trilat.trilat2D(circles)
 
-    finalPosition = trilat2D(circles);
-
-    ax.add_patch(plt.Circle((finalPosition.x, finalPosition.y),radius=.01, color='b', fill=True))
-    plt.draw()
+    #ax.add_patch(plt.Circle((predictedPosition.x, predictedPosition.y),radius=.05, color='b', fill=True))
+    #plt.draw()
+    #print predictedPosition.x, predictedPosition.y
     input("Press enter to continue...")
 
 main()
