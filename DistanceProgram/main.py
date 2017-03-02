@@ -26,22 +26,30 @@ def main ():
 
     # PASS CIRCLES LIST HERE
 
-
+    # Figure setup
     fig=plt.figure(1)
     plt.axis([-5,10,-5,10])
     ax=fig.add_subplot(1,1,1)
     plt.ion()
     plt.show()
     ax.cla()
+
+    # Draw the found nodes and their estimated distances
     plot.drawCircles(plt, ax, circles)
     
+    # Try to predict a central position
     predictedPosition = trilat.trilat2D(circles)
-    if (predictedPosition == -1):
+
+    # If we don't have 2 or more nodes, the trilateration function will not work
+    if (len(circles)<2):
+        # Alert the user
         print("Need 2 or more nodes")
         raw_input("Press enter to continue...")
-
-    ax.add_patch(plt.Circle((predictedPosition.x, predictedPosition.y),radius=.05, color='b', fill=True))
-    plt.draw()
+    # Otherwise draw the predicted position on the graph
+    else:
+        ax.add_patch(plt.Circle((predictedPosition.x, predictedPosition.y),radius=.05, color='b', fill=True))
+    # Show the plot and print the predicted position
+    plt.show()
     print predictedPosition.x, predictedPosition.y
 
     raw_input("Press enter to continue...")
