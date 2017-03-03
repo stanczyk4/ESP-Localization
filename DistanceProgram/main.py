@@ -7,9 +7,12 @@ import matplotlib.pyplot as plt
 import distance
 
 def main ():
-
+    nodes = []
     # Returning list of dictionaries where each is {BSSID:RSSI}
-    nodes = scanner.get_BSSI()
+    print("Hit ctrl+c to stop scanning...\nScanning Networks...")
+    while len(nodes)<2:
+        print(".")
+        nodes = scanner.get_BSSI()
 
     # Calculates distances
     # Converts {BSSID:RSSI} to {BSSID:estimated distance}
@@ -28,11 +31,16 @@ def main ():
         print("Need 2 or more nodes")
 
     else:
+        minX = min(i.x for i in circles)
+        minY = min(i.y for i in circles)
+        maxX = max(i.x for i in circles)
+        maxY = max(i.y for i in circles)
+        axisOffset = 2;
         # Try to predict a central position
         predictedPosition = trilat.trilat2D(circles)
         # Figure setup
         fig=plt.figure(1)
-        plt.axis([-5,10,-5,10])
+        plt.axis([minX - axisOffset, maxX + axisOffset, minY - axisOffset, maxY + axisOffset])
         ax=fig.add_subplot(1,1,1)
         plt.ion()
         plt.show()
@@ -46,7 +54,11 @@ def main ():
         # Show the plot and print the predicted position
         plt.show()
 
-    raw_input("Press enter to continue...")
+    input = raw_input("Enter 1 to re-run, else quit program: ")
+    if (input == '1'):
+        main()
+    else:
+        return
 
 main()
 
