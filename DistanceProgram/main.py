@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import distance
 
 def main ():
+    plotGraphs = True
     nodes = []
     # Returning list of dictionaries where each is {BSSID:RSSI}
     print("Hit ctrl+c to stop scanning...\nScanning Networks...")
@@ -31,28 +32,29 @@ def main ():
         print("Need 2 or more nodes")
 
     else:
-        minX = min(i.x for i in circles)
-        minY = min(i.y for i in circles)
-        maxX = max(i.x for i in circles)
-        maxY = max(i.y for i in circles)
-        axisOffset = 2;
-        # Try to predict a central position
+         # Try to predict a central position
         predictedPosition = trilat.trilat2D(circles)
-        # Figure setup
-        fig=plt.figure(1)
-        plt.axis([minX - axisOffset, maxX + axisOffset, minY - axisOffset, maxY + axisOffset])
-        ax=fig.add_subplot(1,1,1)
-        plt.ion()
-        plt.show()
-        ax.cla()
-
-        # Otherwise draw the predicted position on the graph
-        # Draw the found nodes and their estimated distances
-        plot.drawCircles(plt, ax, circles)
-        ax.add_patch(plt.Circle((predictedPosition.x, predictedPosition.y),radius=.05, color='b', fill=True))
         print predictedPosition.x, predictedPosition.y
-        # Show the plot and print the predicted position
-        plt.show()
+        if (plotGraphs == True):
+            minX = min(i.x for i in circles)
+            minY = min(i.y for i in circles)
+            maxX = max(i.x for i in circles)
+            maxY = max(i.y for i in circles)
+            #axisOffset = max(i.r for i in circles)
+            axisOffset = 2;
+            # Figure setup
+            fig=plt.figure(1)
+            plt.axis([minX - axisOffset, maxX + axisOffset, minY - axisOffset, maxY + axisOffset])
+            ax=fig.add_subplot(1,1,1)
+            plt.ion()
+            plt.show()
+            ax.cla()
+            # Otherwise draw the predicted position on the graph
+            # Draw the found nodes and their estimated distances
+            plot.drawCircles(plt, ax, circles)
+            ax.add_patch(plt.Circle((predictedPosition.x, predictedPosition.y),radius=.05, color='b', fill=True))
+            # Show the plot and print the predicted position
+            plt.show()
 
     input = raw_input("Enter 1 to re-run, else quit program: ")
     if (input == '1'):
