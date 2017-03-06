@@ -12,7 +12,7 @@ def main ():
     # Returning list of dictionaries where each is {BSSID:RSSI}
     print("Hit ctrl+c to stop scanning...\nScanning Networks...")
     while len(nodes)<2:
-        print(".")
+        print("."),
         nodes = scanner.get_BSSI()
 
     # Calculates distances
