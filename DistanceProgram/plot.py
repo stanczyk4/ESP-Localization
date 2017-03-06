@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 def drawCircles(circles,predictedPosition):
-	minX = min(i.x for i in circles)
+    minX = min(i.x for i in circles)
     minY = min(i.y for i in circles)
     maxX = max(i.x for i in circles)
     maxY = max(i.y for i in circles)
