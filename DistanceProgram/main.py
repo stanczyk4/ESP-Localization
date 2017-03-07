@@ -14,6 +14,7 @@ def main ():
     print("Hit ctrl+c to stop scanning...\nScanning Networks...")
     while len(nodes)<2:
         print("."),
+        time.sleep(1)
         nodes = scanner.get_BSSI()
 
     # Calculates distances
