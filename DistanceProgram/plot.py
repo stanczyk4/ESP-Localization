@@ -12,9 +12,13 @@ def drawCircles(circles,predictedPosition):
     fig=plt.figure(1)
     plt.axis([minX - axisOffset, maxX + axisOffset, minY - axisOffset, maxY + axisOffset])
     ax=fig.add_subplot(1,1,1)
+    ax.cla()
+    ax.set_title('Node Localization')
+    ax.set_xlabel('X Distance (in meters)')
+    ax.set_ylabel('Y Distance (in meters)')
     plt.ion()
     plt.show()
-    ax.cla()
+    
     # Otherwise draw the predicted position on the graph
     # Draw the found nodes and their estimated distances
 
@@ -22,8 +26,12 @@ def drawCircles(circles,predictedPosition):
         x = circle.x
         y = circle.y
         rad = circle.r
+        name = "Node"
+        if (circle.name):
+            name = circle.name
         ax.add_patch(plt.Circle((x,y),radius=rad, color='k', fill=False))
         ax.add_patch(plt.Circle((x,y),radius=.05, color='k', fill=True))
+        ax.annotate(name, xy=(x,y+.25),horizontalalignment='center',size=8)
     
     ax.add_patch(plt.Circle((predictedPosition.x, predictedPosition.y),radius=.06, color='b', fill=True))
     # Show plot
