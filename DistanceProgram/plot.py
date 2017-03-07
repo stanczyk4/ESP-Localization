@@ -5,8 +5,8 @@ def drawCircles(circles,predictedPosition):
     minY = min(i.y for i in circles)
     maxX = max(i.x for i in circles)
     maxY = max(i.y for i in circles)
-    #axisOffset = max(i.r for i in circles)
-    axisOffset = 2;
+    axisOffset = max(i.r for i in circles)
+    #axisOffset = 2;
 
     # Figure setup
     fig=plt.figure(1)
