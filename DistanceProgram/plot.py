@@ -31,7 +31,7 @@ def drawCircles(circles,predictedPosition):
             name = circle.name
         ax.add_patch(plt.Circle((x,y),radius=rad, color='k', fill=False))
         ax.add_patch(plt.Circle((x,y),radius=.05, color='k', fill=True))
-        ax.annotate(name, xy=(x,y+.25),horizontalalignment='center',size=8)
+        ax.annotate(name, xy=(x,y+.15),horizontalalignment='center',size=8)
     
     ax.add_patch(plt.Circle((predictedPosition.x, predictedPosition.y),radius=.06, color='b', fill=True))
     # Show plot
