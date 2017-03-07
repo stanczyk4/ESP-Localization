@@ -9,17 +9,17 @@ class nodeClass(object):
 nodeList = []
 
 # Node 1
-node1 = nodeClass("Node 1", '5E:CF:7F:D1:78:FE', 0, 0)
+node1 = nodeClass("SPS:1", '5E:CF:7F:D1:78:FE', 0, 0)
 # Node 2
-node2 = nodeClass("Node 2", '5E:CF:7F:D1:8F:87', 0, 0)
+node2 = nodeClass("SPS:2", '5E:CF:7F:D1:8F:87', 0, 0)
 # Node 3
-node3 = nodeClass("Node 3", '5E:CF:7F:D1:83:81', 0, 0)
+node3 = nodeClass("SPS:3", '5E:CF:7F:D1:83:81', 0, 0)
 # Node 4
-node4 = nodeClass("Node 4", '5E:CF:7F:D1:75:2A', 0, 0)
+node4 = nodeClass("SPS:4", '5E:CF:7F:D1:75:2A', 0, 0)
 # Node 5
-node5 = nodeClass("Node 5", 'A2:20:A6:0D:0F:E8', 0, 0)
+node5 = nodeClass("SPS:5", 'A2:20:A6:0D:0F:E8', 0, 0)
 # Node 6
-node6 = nodeClass("Node 6", 'A2:20:A6:0D:0F:B9', 0, 0)
+node6 = nodeClass("SPS:6", 'A2:20:A6:0D:0F:B9', 0, 0)
 # Node 7
 #node7 = node("Node 7", '', 0, 0)
 # Node 8
