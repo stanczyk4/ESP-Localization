@@ -1,9 +1,6 @@
 class Packet():
 	def __init__(self, packet):
 		self.packet = packet
-		self.MAC_Sensor = ""
-		self.MAC_Beacon = ""
-		self.Rssi = ""
 
 	def sortPacket(self):
 		self.splitData = self.packet.split(',')
