@@ -1,6 +1,28 @@
 import math
 import time
 
+class SensorList():
+    def __init__(self):
+        self.list = []
+        self.sensorIndex = 0
+        self.found = False
+
+    def getIndex(self, MAC):
+        for i in range(len(self.list)):
+            if self.list[i].mac == MAC:
+                #this is the sensor data object we want
+                self.sensorIndex = i
+                self.found = True
+                break
+
+    def wasFound(self, MAC, db):
+        if not(self.found):
+            sensorID = db.searchIDfromMACinSensor(MAC)
+            newSensor = SensorData(MAC, sensorID)
+            self.list.append(newSensor)
+            self.sensorIndex = len(self.list) - 1
+
+
 class SensorData(object):
     def __init__(self,MAC,ID):
         self.mac = MAC

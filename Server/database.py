@@ -14,7 +14,7 @@ class Database:
 
     def searchIDfromMACinSensor(self, MAC):
         self.c.execute('SELECT ID FROM sensor WHERE MAC=?',(MAC,))
-        return self.c.fetchone()
+        return self.c.fetchone()[0]
 
     def closeDatabase(self):
         self.conn.close()
