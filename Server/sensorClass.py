@@ -1,6 +1,9 @@
 import math
 import time
 
+#local library
+import trilat
+
 class SensorList():
     def __init__(self):
         self.list = []
@@ -21,6 +24,21 @@ class SensorList():
             newSensor = SensorData(MAC, sensorID)
             self.list.append(newSensor)
             self.sensorIndex = len(self.list) - 1
+
+    def removeOldSensors(self):
+        self.list[self.sensorIndex].clearOld()
+
+    def addNewSensor(self, packet, db):
+        self.list[self.sensorIndex].replaceData(packet.MAC_Beacon, packet.Rssi, db)
+
+    def listSensorItems(self):
+        return self.list[self.sensorIndex].data_dict.items()
+
+    def sensorListLength(self):
+        return len(self.list[self.sensorIndex].data_dict.items())
+
+    def sensorTrilat(self):
+        return trilat.trilat2D(self.list[self.sensorIndex].data_dict)
 
 
 class SensorData(object):

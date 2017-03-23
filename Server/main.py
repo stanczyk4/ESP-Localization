@@ -7,7 +7,7 @@ import database
 import server
 import packet
 import sensorClass
-import trilat
+#import trilat
 
 databaseFilePath = 'database.db'
 serverIP = "127.0.0.1"
@@ -49,18 +49,17 @@ def main():
 
             # Clear out old data from beacons
             print "Cleaning expired data...\n"
-            sensorData.list[sensorData.sensorIndex].clearOld()
+            sensorData.removeOldSensors()
 
             # Add the new values
             print "Adding new data values...\n"
-            sensorData.list[sensorData.sensorIndex].replaceData(newPacket.MAC_Beacon,newPacket.Rssi,db.c)
+            sensorData.addNewSensor(newPacket, db.c)
 
-            #print sensorData[sensorIndex].data_dict.items()
-            print sensorData.list[sensorData.sensorIndex].data_dict.items()
+            print sensorData.listSensorItems() 
 
             # Check if there are 3 or more beacons for this sensorData, if so, Trilaterate it
-            if len(sensorData.list[sensorData.sensorIndex].data_dict.items()) > 2:
-                loc = trilat.trilat2D(sensorData.list[sensorData.sensorIndex].data_dict)
+            if sensorData.sensorListLength() > 2:
+                loc = sensorData.sensorTrilat()
                 print "LOCATION:",loc
 
 
