@@ -7,15 +7,15 @@ import database
 import server
 import packet
 import sensorClass
-#import trilat
+#import plot
 
 databaseFilePath = 'database.db'
 serverIP = "127.0.0.1"
 serverPORT = 5006
-
-#sensorData = []
+#plotGraph = True
 
 def programExit(db,serv):
+    #graph.closeGraph()
     db.closeDatabase()
     serv.closeSocket()
     sys.exit()
@@ -27,12 +27,16 @@ def main():
     #create server object serv to handle all server operations
     serv = server.Server(serverIP, serverPORT)
 
+    #create plot figure if plotGraph = True, otherwise set myGraph to False
+    #myGraph = plot.Plot(plotGraph)
+
     #register an OnExit function to close the database and server in case the program exits
     atexit.register(programExit, db, serv)
 
     #start listening to packets in the background
     serv.listenForPackets()
     sensorData = sensorClass.SensorList()
+ 
 
     while True:
         #checks if we have a packet, if so, do something else loop again
@@ -61,6 +65,10 @@ def main():
             if sensorData.sensorListLength() > 2:
                 loc = sensorData.sensorTrilat()
                 print "LOCATION:",loc
+                #if plotGraph:
+                #    plot.PlotFunction(sensorData.listSensorItems(), loc)
+                #if myGraph:
+                #    myGraph.plotGraph(sensorData.listSensorItems(), loc)
 
 
 if __name__ == "__main__":

@@ -1,8 +1,8 @@
-import math
 import time
 
 #local library
 import trilat
+import distance
 
 class SensorList():
     def __init__(self):
@@ -64,7 +64,7 @@ class SensorData(object):
         db.execute('SELECT Z FROM node WHERE MAC=?',(MAC,))
         Z = db.fetchone()[0]
 
-        est_dist = math.pow(math.e,(int(RSSI) + 42.849) / -10.693)
+        est_dist = distance.calcDistance(RSSI)
 
         self.data_dict[MAC] = [est_dist,time.time(),X,Y,Z]
 
