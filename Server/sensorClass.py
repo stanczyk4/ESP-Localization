@@ -57,6 +57,8 @@ class SensorData(object):
     def replaceData(self,MAC,RSSI,db):
         # If we are replacing data, we should already know if the combo exists
         # or not
+        if (RSSI < -65):
+            return
         db.execute('SELECT X FROM node WHERE MAC=?',(MAC,))
         X = db.fetchone()[0]
         db.execute('SELECT Y FROM node WHERE MAC=?',(MAC,))

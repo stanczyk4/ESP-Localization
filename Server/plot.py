@@ -31,7 +31,8 @@ class Plot():
 		maxY = max(y[1][3] for y in nodes)
 		axisOffset = max(rssi[1][0] for rssi in nodes)
 
-		plt.axis([minX - axisOffset, maxX + axisOffset, minY - axisOffset, maxY + axisOffset])
+		plt.axis([-1, 5, -1, 7.5])
+		#plt.axis([minX - axisOffset, maxX + axisOffset, minY - axisOffset, maxY + axisOffset])
 		for circle in nodes:
 			x = circle[1][2]
 			y = circle[1][3]
@@ -48,7 +49,7 @@ class Plot():
 		self.ax.add_patch(plt.Circle((loc.x, loc.y),radius=.06, color='b', fill=True))
 
 		self.fig.canvas.draw()
-		#plt.show()
+		plt.show()
 
 
 

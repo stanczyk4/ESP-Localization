@@ -10,8 +10,8 @@ import sensorClass
 import plot
 
 databaseFilePath = 'database.db'
-serverIP = "127.0.0.1"
-serverPORT = 5005
+serverIP = "192.168.2.1"
+serverPORT = 5000
 plotGraph = True
 
 def programExit(db,serv,graph):
